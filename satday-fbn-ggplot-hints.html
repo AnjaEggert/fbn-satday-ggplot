@@ -3161,28 +3161,37 @@ vertical-align: -.125em;
 <h1>R Libraries</h1>
 <p>Please note that the package <code>ggplot2</code> is included in the tidy universe:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)     <span class="co"># tidy universe</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)       <span class="co"># colour scales</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)     <span class="co"># combine plots</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)       <span class="co"># agricultural data sets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="data-sets" class="level1">
 <h1>Data sets</h1>
 <p>You can use data from the <code>agridat</code> R package or your own data. But also other packages come with data sets. You can see the list of pre-loaded data, type the function <code>data()</code>:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>?agridat <span class="co"># list all datasets with keywords</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>starte den http Server für die Hilfe fertig</code></pre>
 </div>
 </div>
 <p>Choose and load one data set of your choice using <code>data(&quot;name_of_dataset&quot;)</code>. The <promise> you see means that the object hasn’t been fully evaluated yet. This happens because the data is lazily loaded from the package but hasn’t been accessed yet.</promise></p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;crampton.pig&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crampton.pig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  treatment rep weight1 feed weight2
 1        T1  R1      30  674     195
@@ -3195,18 +3204,24 @@ vertical-align: -.125em;
 </div>
 <p>You could also type this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> agridat<span class="sc">::</span>crampton.pig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="some-data-wrangling" class="level1">
 <h1>Some data wrangling</h1>
 <p>I like to use the tidy way of data processing. Therefore I suggest to convert the data table into a tibble. We also convert columns into factors.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(dat) <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(treatment, </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                 rep), <span class="sc">~</span><span class="fu">as.factor</span>(.))</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 50 × 5
    treatment rep   weight1  feed weight2
@@ -3231,8 +3246,11 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="empty-plot">Empty plot</h2>
 <p>This only creates an empty plot, without any layers.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3243,8 +3261,11 @@ vertical-align: -.125em;
 </div>
 <p>You can run the code without typing “data =”. It is just shorter.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3255,8 +3276,11 @@ vertical-align: -.125em;
 </div>
 <p>Or you can also pipe the data into ggplot:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3270,9 +3294,12 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="simple-scatter-plot">Simple scatter plot</h2>
 <p>Now we add <code>geom_point()</code> to create a scatter plot. The components of a ggplot are combined with <code>+</code>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3283,6 +3310,8 @@ vertical-align: -.125em;
 </div>
 <p><code>geom_point()</code> is a shortcut. Behind the scenes it calls the <code>layer()</code> function to create a new layer:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layer</span>(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="cn">NULL</span>, </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="cn">NULL</span>,</span>
@@ -3290,17 +3319,21 @@ vertical-align: -.125em;
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">stat_params =</span> <span class="fu">list</span>(),</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">position =</span> <span class="st">&quot;identity&quot;</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="add-more-layers" class="level2">
 <h2 class="anchored" data-anchor-id="add-more-layers">Add more layers</h2>
 <p>Combine a scatter and a line plot and choose a theme of your choice. Please recognize that the order of the layers matters:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;tomato&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="at">shape =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3311,11 +3344,14 @@ vertical-align: -.125em;
 </div>
 <p>Do you see the difference?</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="at">shape =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;tomato&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3335,34 +3371,46 @@ vertical-align: -.125em;
 </ol>
 <p>HINT 1:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;___&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;___&quot;</span>) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> ___) <span class="sc">+</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>HINT 2:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> ___, <span class="at">fill =</span> <span class="st">&quot;___&quot;</span>, <span class="at">col =</span> <span class="st">&quot;___&quot;</span>) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>HINT 3:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">col =</span> ___)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>HINT 4:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">col =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(___) <span class="sc">+</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -3375,6 +3423,8 @@ vertical-align: -.125em;
 <p>it means that observations sharing the same value of <code>treatment</code> are treated as a group in the visualization. The effect of this depends on the type of geom used:</p>
 <p>When <code>group = treatment</code> is specified in a line plot, it ensures that each level of <code>treatment</code> gets its own separate line.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">group =</span> treatment, <span class="at">col =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
@@ -3383,6 +3433,7 @@ vertical-align: -.125em;
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Treatment&quot;</span>) <span class="sc">+</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3396,11 +3447,14 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="statistical-transformations">Statistical transformations</h2>
 <p>Add a statistics layer, here <code>lm</code> function to smooth the data.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3411,6 +3465,8 @@ vertical-align: -.125em;
 </div>
 <p>For scatter plots, group usually is not needed because each point is independent. But if used in combination with <code>geom_smooth()</code>, it affects how trend lines are drawn.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">group =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -3419,6 +3475,7 @@ vertical-align: -.125em;
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Treatment&quot;</span>) <span class="sc">+</span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 </div>
@@ -3435,6 +3492,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="jittering">Jittering</h2>
 <p>Jittering is useful when data points overlap too much, making it hard to see individual observations. Instead of plotting points exactly at their values, jittering adds a small random variation, helping to reduce overplotting and make patterns more visible.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span>  </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;T2&quot;</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jit =</span> <span class="fu">jitter</span>(<span class="fu">as.numeric</span>(treatment), <span class="fl">0.3</span>)) <span class="sc">|&gt;</span>  </span>
@@ -3447,10 +3506,11 @@ vertical-align: -.125em;
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> jit), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3465,6 +3525,8 @@ vertical-align: -.125em;
 </ol>
 <p>HINT 1:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">group =</span> ___)) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="sc">+</span></span>
@@ -3473,17 +3535,23 @@ vertical-align: -.125em;
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Treatment&quot;</span>) <span class="sc">+</span></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>HINT 2:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(___) <span class="sc">+</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>HINT 3:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span>  </span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;T2&quot;</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jit =</span> <span class="fu">jitter</span>(___)) <span class="sc">|&gt;</span>  </span>
@@ -3496,6 +3564,7 @@ vertical-align: -.125em;
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> jit, </span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> ___))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -3506,6 +3575,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="continuous-scales">Continuous scales</h2>
 <p>Use a colour scale from the <code>viridis</code> package:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">col =</span> weight1)) <span class="sc">+</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -3516,6 +3587,7 @@ vertical-align: -.125em;
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Initial weight (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3529,6 +3601,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="discrete-scales">Discrete scales</h2>
 <p>Use a colour scale from the <code>viridis</code> package:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight2, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -3537,6 +3611,7 @@ vertical-align: -.125em;
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3547,6 +3622,8 @@ vertical-align: -.125em;
 </div>
 <p>You can define your manual scale:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight2, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -3559,6 +3636,7 @@ vertical-align: -.125em;
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3572,6 +3650,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="dates-and-times">Dates and times</h2>
 <p>This is a data set of daily air quality measurements in New York, May to September 1973.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>air <span class="ot">&lt;-</span> <span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>air <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(airquality) <span class="sc">|&gt;</span> </span>
@@ -3580,21 +3660,30 @@ vertical-align: -.125em;
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Day =</span> <span class="fu">str_pad</span>(Day, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">side =</span> <span class="st">&quot;left&quot;</span>, <span class="at">pad =</span> <span class="st">&quot;0&quot;</span>),</span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">ymd</span>(<span class="fu">paste</span>(<span class="dv">1973</span>, Month, Day, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>))</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We plot the data and add a box and some text.</p>
 <p>In the theme, the size is defined in pts. So here 15, means 15 pts. In geom_text, the size is defined in mm, so it’s 15 mm. What is the relation between pts and mm or in? If we want exactly the same size for the title and the text in the plot, we can apply this conversion:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from pt to mm : mm = pt / .pt -&gt; 15 / 2.845276 = 5.27</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span>.pt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.845276</code></pre>
 </div>
 </div>
 <p>If the date labels are shown in German, we can change this. Set Locale to English Use the Sys.setlocale() function to set the locale for the language you want.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.setlocale(&quot;LC_TIME&quot;, &quot;English_United States.UTF-8&quot;)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>rect <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">xmin=</span><span class="fu">as.Date</span>(<span class="sc">-</span><span class="cn">Inf</span>), <span class="at">xmax=</span><span class="fu">as.Date</span>(<span class="cn">Inf</span>), <span class="at">ymin=</span><span class="dv">25</span>, <span class="at">ymax=</span><span class="dv">30</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>air <span class="sc">|&gt;</span> </span>
@@ -3614,6 +3703,7 @@ vertical-align: -.125em;
 <span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&quot;New York&quot;</span>,</span>
 <span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">4</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">&quot;grey20&quot;</span>) <span class="sc">+</span></span>
 <span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3631,6 +3721,8 @@ vertical-align: -.125em;
 </ol>
 <p>Hint 1:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">fill =</span> weight1)) <span class="sc">+</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, ___) <span class="sc">+</span></span>
@@ -3641,9 +3733,12 @@ vertical-align: -.125em;
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Initial weight (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Hint 2:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Month name: use %b and %B for abbreviated and full month name</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># %d: day of the month as decimal number</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># %Y: Year with century</span></span>
@@ -3657,6 +3752,7 @@ vertical-align: -.125em;
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;1973&quot;</span>,</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Temperature (°C)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -3664,6 +3760,8 @@ vertical-align: -.125em;
 <h1>Facet Mapping</h1>
 <p>Variables of the data set are used to define the sub-plots, i.e. many plots with the same type of plot. Very useful to get a quick overview of larger data sets.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2)) <span class="sc">+</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -3671,6 +3769,7 @@ vertical-align: -.125em;
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>treatment) <span class="sc">+</span></span>
 <span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3686,6 +3785,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="boxplots">Boxplots</h2>
 <p>The default legend of a boxplot is ugly. The shapes are not reactangles, but tiny boxplots. This is an easy way to prevent this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight2, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -3696,6 +3797,7 @@ vertical-align: -.125em;
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Treatment&quot;</span>) <span class="sc">+</span></span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
 <span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">linetype =</span> <span class="dv">0</span>, <span class="at">size  =</span> <span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-error">
 <pre><code>Error: Objekt &#39;my_theme&#39; nicht gefunden</code></pre>
 </div>
@@ -3705,6 +3807,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="single-legend">Single legend</h2>
 <p>In this case we want to colour the points and also use different shapes. Without the trick, two legends would be shown. Matching title ensures a single legend.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">col =</span> treatment, <span class="at">shape =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -3716,6 +3820,7 @@ vertical-align: -.125em;
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Initial weight (kg)&quot;</span>,</span>
 <span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">shape =</span> <span class="st">&quot;Initial weight (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3730,6 +3835,8 @@ vertical-align: -.125em;
 <h1>Define custom theme</h1>
 <p>Creating a custom ggplot2 theme allows you to control the overall appearance of your plots, ensuring consistency across multiple visualizations. When defining your own theme, you can adjust several components to tailor the plot’s style.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>my_theme <span class="ot">=</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;sans&quot;</span>),</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title   =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;plain&quot;</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
@@ -3741,9 +3848,12 @@ vertical-align: -.125em;
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Now we apply this own theme to a plot:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> weight2, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -3752,6 +3862,7 @@ vertical-align: -.125em;
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
 <span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  my_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3765,6 +3876,8 @@ vertical-align: -.125em;
 <h1>Combining plots with patchwork</h1>
 <p>The patchwork package is a powerful and flexible tool for combining multiple ggplots into a single layout. It is simple to use and provides a variety of options to control the arrangement of plots.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">&quot;T1&quot;</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> feed, <span class="at">y =</span> weight2, <span class="at">col =</span> weight1)) <span class="sc">+</span></span>
@@ -3812,8 +3925,11 @@ vertical-align: -.125em;
 <span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Final body mass (kg)&quot;</span>,</span>
 <span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;Initial weight (kg)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3 <span class="sc">+</span> p4 <span class="sc">+</span> </span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>) <span class="sc">+</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis</span>(<span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
@@ -3821,13 +3937,17 @@ vertical-align: -.125em;
 <span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.tag =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">20</span>),</span>
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for colour is already present.
 Adding another scale for colour, which will replace the existing scale.</code></pre>
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3840,11 +3960,16 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <section id="save-plots" class="level1">
 <h1>Save plots</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;plot.png&quot;</span>, <span class="at">plot =</span> combined, </span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>, <span class="at">units =</span> <span class="st">&quot;mm&quot;</span>,</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">&quot;figure.png&quot;</span>,</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>, <span class="at">units =</span> <span class="st">&quot;mm&quot;</span>,</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pointsize =</span> <span class="dv">10</span>, <span class="at">res =</span> <span class="dv">600</span>)</span>
@@ -3852,6 +3977,7 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>combined</span>
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="how-to-cite-r" class="level1">
@@ -3859,7 +3985,10 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <p>“All analyses were performed using R Statistical Software (version 4.4.2; R Core Team 2024)”.</p>
 <p>Reference: R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>To cite R in publications use:
 
@@ -3882,13 +4011,19 @@ We have invested a lot of time and effort in creating R, please cite it
 when using it for data analysis. See also &#39;citation(&quot;pkgname&quot;)&#39; for
 citing R packages.</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>version<span class="sc">$</span>version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;R version 4.4.2 (2024-10-31 ucrt)&quot;</code></pre>
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Um Paket &#39;tidyverse&#39; in Publikationen zu zitieren, nutzen Sie bitte:
 
@@ -3912,7 +4047,10 @@ Ein BibTeX-Eintrag für LaTeX-Benutzer ist
     doi = {10.21105/joss.01686},
   }</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;viridis&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>To cite viridis/viridisLite in publications use:
 
@@ -3931,7 +4069,10 @@ Ein BibTeX-Eintrag für LaTeX-Benutzer ist
     doi = {10.5281/zenodo.4679423},
   }</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;patchwork&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Um Paket &#39;patchwork&#39; in Publikationen zu zitieren, nutzen Sie bitte:
 
@@ -3948,7 +4089,10 @@ Ein BibTeX-Eintrag für LaTeX-Benutzer ist
     url = {https://CRAN.R-project.org/package=patchwork},
   }</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;agridat&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Um Paket &#39;agridat&#39; in Publikationen zu zitieren, nutzen Sie bitte:
 
@@ -3970,7 +4114,10 @@ Ein BibTeX-Eintrag für LaTeX-Benutzer ist
 <section id="session-info" class="level1">
 <h1>Session Info</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.2 (2024-10-31 ucrt)
 Platform: x86_64-w64-mingw32/x64
